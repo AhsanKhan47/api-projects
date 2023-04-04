@@ -39,7 +39,7 @@ export default async function Home() {
                 <div>
                   {/* Fetching image from contentful */}
                   {blogs.includes.Asset.map((a: any) => (
-                    <div>
+                    <div key={a.id}>
                       {item.fields.image1.sys.id == a.sys.id ? (
                         <img
                           src={"https:" + a.fields.file.url}
