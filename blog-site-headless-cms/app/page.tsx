@@ -1,9 +1,7 @@
-import Image from "next/image";
 import { Inter } from "next/font/google";
-import styles from "./page.module.css";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { client } from "@/lib/contentful/clients";
-const inter = Inter({ subsets: ["latin"] });
+import Wrapper from "@/components/Wrapper";
+
 async function getBlogData() {
   const res = await fetch(
     `https://cdn.contentful.com/spaces/${process.env.CONTENTFUL_SPACE_ID}/entries?access_token=${process.env.CONTENTFUL_ACCESS_KEY}&content_type=body`,
@@ -19,35 +17,57 @@ async function getBlogData() {
 
 export default async function Home() {
   const blogs = await getBlogData();
-  console.log(blogs.items.item);
 
   return (
     <>
-      <div className=" text-slate-200 text-4xl">
-        {blogs.items.map((item: any) => (
-          <>
-            <p> {item.fields.heading}</p>
-            <div>{documentToReactComponents(item.fields.paragraph1)}</div>
-            <div>
-              <div>
-                {blogs.includes.Asset.map((a: any) => (
-                  <div>
-                    {item.fields.image1.sys.id == a.sys.id ? (
-                      <img
-                        src={"https:" + a.fields.file.url}
-                        alt=""
-                        className="h-[300px] w-[300px] md:h-[500px] md:w-[500px]"
-                      />
-                    ) : (
-                      <div></div>
-                    )}
-                  </div>
-                ))}
+      <Wrapper>
+        <div className="  w-11/12 mx-auto sm:w-9/12 lg:w-11/12 bg-slate-100 p-8">
+          {blogs.items.map((item: any) => (
+            <>
+              <p className="font-semibold w-10/12 my-4 text-3xl sm:text-4xl md:text-5xl md:mt-10 md:font-bold ">
+                {" "}
+                {item.fields.heading}
+              </p>
+              <div className=" sm:text-xl sm:my-8">
+                {documentToReactComponents(item.fields.para1)}
               </div>
-              <div>{documentToReactComponents(item.fields.paragraph2)}</div>
-              {/* Author Secton */}
 
-              {/* <div>
+              <div>
+                <p className="my-6 font-bold text-lg sm:text-2xl sm:my-8">
+                  {item.fields.heading2}
+                </p>
+                <div>
+                  {/* Fetching image from contentful */}
+                  {blogs.includes.Asset.map((a: any) => (
+                    <div>
+                      {item.fields.image1.sys.id == a.sys.id ? (
+                        <img
+                          src={"https:" + a.fields.file.url}
+                          alt=""
+                          className="h-[250px] w-[250px] sm:h-[500px] sm:w-[500px] mx-auto my-20"
+                        />
+                      ) : (
+                        <div></div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="my-6 font-semibold sm:text-xl sm:my-8">
+                  {documentToReactComponents(item.fields.para2)}
+                </div>
+                <div className="my-6 sm:text-xl sm:my-8">
+                  {documentToReactComponents(item.fields.para3)}
+                </div>
+                <div className="my-6 sm:text-xl sm:my-8">
+                  {documentToReactComponents(item.fields.para4)}
+                </div>
+                <div className="my-6 sm:text-xl sm:my-8">
+                  {documentToReactComponents(item.fields.para5)}
+                </div>
+                {/* Author Secton */}
+
+                {/* <div>
                 {blogs.includes.Asset.map((a: any) => (
                   <div>
                     {item.fields.creator.sys.id == a.sys.id ? (
@@ -62,10 +82,11 @@ export default async function Home() {
                   </div>
                 ))}
               </div> */}
-            </div>
-          </>
-        ))}
-      </div>
+              </div>
+            </>
+          ))}
+        </div>
+      </Wrapper>
     </>
   );
 }
