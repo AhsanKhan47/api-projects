@@ -1,6 +1,5 @@
 import React from "react";
-import { getPost } from "../contentful/post";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { getPost } from "@/app/contentful/post";
 import Link from "next/link";
 import { log } from "console";
 export default async function page() {

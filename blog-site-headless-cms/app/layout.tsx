@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import "./globals.css";
 import { Work_Sans } from "next/font/google";
 import { Chivo } from "next/font/google";
@@ -20,7 +21,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`bg-slate-50 text-slate-800 ${SpaceGrotesk.className}`}>
+      <body className={`bg-slate-200 text-slate-800 ${SpaceGrotesk.className}`}>
+        <Navbar />
         {children}
       </body>
     </html>
