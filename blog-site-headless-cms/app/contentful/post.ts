@@ -5,6 +5,7 @@ import { log } from "console";
 
 interface Post{
     title:string,
+    summary:string,
     slug:string,
     content:Document
 }

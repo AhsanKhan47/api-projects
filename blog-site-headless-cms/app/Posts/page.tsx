@@ -9,16 +9,27 @@ export default async function page() {
   return (
     <>
       <div className="flex flex-col text-white h-screen bg-slate-900">
-        <h1>Posts</h1>
-
-        {posts.map((post: any) => (
-          <Link
-            className="text-gray-200 hover:text-gray-400 transition-all"
-            href={`/Posts/${post.slug}`}
-          >
-            {post.title}
-          </Link>
-        ))}
+        <div className="w-8/12 md:9/12 lg:w-6/12 mx-auto grid grid-cols-2 gap-8   ">
+          {posts.map((post: any) => (
+            <div className="border border-slate-50 border-opacity-30 p-8 rounded-md">
+              {" "}
+              <Link
+                className="text-gray-200 hover:text-gray-400 transition-all text-xl"
+                href={`/Posts/${post.slug}`}
+                key={post.title}
+              >
+                {post.title}
+              </Link>
+              <h3>{post.summary}</h3>
+              <Link
+                href={`/Posts/${post.slug}`}
+                className="text-gray-200 hover:text-gray-400 transition-all text-xl "
+              >
+                learn more
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
