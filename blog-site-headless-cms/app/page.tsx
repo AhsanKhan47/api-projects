@@ -3,6 +3,10 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import Link from "next/link";
 import { log } from "console";
 import { getPost } from "./contentful/post";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "ahsanWrites",
+};
 export default async function page() {
   const posts = await getPost();
 

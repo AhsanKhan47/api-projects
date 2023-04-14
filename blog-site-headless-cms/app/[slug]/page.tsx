@@ -2,9 +2,18 @@ import React from "react";
 import { getPostContent } from "@/app/contentful/post";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { log } from "console";
+import { Metadata } from "next";
 interface Props {
   params: {
     slug: string;
+  };
+}
+export async function generateMetadata({
+  params: { slug },
+}: Props): Promise<Metadata> {
+  const post = await getPostContent(slug);
+  return {
+    title: post.title,
   };
 }
 export default async function page({ params: { slug } }: Props) {
